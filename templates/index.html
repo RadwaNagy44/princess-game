@@ -1,0 +1,120 @@
+<html>
+<head>
+    <title>Princess Game</title>
+    <style>
+        body {
+            background-color: #d9dadd;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #8e1280;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #dac804;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 8px;
+            color: #8e1280;
+            border: 2px solid #a1a1a1;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #8e1280;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f069d3;
+        }
+
+        .message {
+            color: #dac804;
+            font-size: 1em;
+        }
+
+        .end-message {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .win {
+            color: #1ebaed;
+        }
+
+        .lose {
+            color: #ed2373;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+<h1 style="text-align:center; color:#f069d3;">Welcome To Princess Game👑</h1>
+
+<h2>You are in: {{ room.name }} room</h2>
+<p style="color: #8d8a90;">{{ room.description }}</p>
+
+<p class="time">⏳ Time left: {{ time_left }} seconds</p>
+
+{% if room.items %}
+<p style="color: #8e1280;">
+    <strong>Items here:</strong> {{ room.items | join(", ") }}
+</p>
+{% endif %}
+
+<p style="color: #8e1280;">
+    <strong>Your inventory:</strong>
+    {% if inventory %}
+        {{ inventory | join(", ") }}
+    {% else %}
+        Empty
+    {% endif %}
+</p>
+
+{% if not game_over %}
+<form method="post">
+    <input type="text" name="command" placeholder="go north / take key" required>
+    <button type="submit">Submit</button>
+</form>
+{% endif %}
+
+{% if message %}
+<p class="message">{{ message | safe }}</p>
+{% endif %}
+
+{% if end_message %}
+<p class="end-message {% if result_type == 'win' %}win{% elif result_type == 'lose' %}lose{% endif %}">
+    {{ end_message | safe }}
+</p>
+{% endif %}
+
+{% if game_over %}
+<form action="/reset" method="post" style="margin-top: 15px;">
+    <button type="submit">🔁 Play Again</button>
+</form>
+{% endif %}
+
+</div>
+</body>
+</html>

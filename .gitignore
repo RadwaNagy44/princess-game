@@ -1,0 +1,17 @@
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+
+# IDE / Editor settings
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
