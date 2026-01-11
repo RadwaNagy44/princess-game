@@ -82,7 +82,6 @@ python -m src.princess_game.cli
 **Available Commands:**
 - `go north` / `go south` / `go east` / `go west` – Move between rooms
 - `take [item]` – Pick up items (key, map, crown)
-- `inventory` – Check your collected items
 - `help` – Show available commands
 - `quit` – Exit the game
 
